@@ -8,11 +8,11 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class Controller {
-	private static final String template = "{value: %s, status: %s}";
+	private static final String template = "{index: %s, database: %s}";
 	private final AtomicLong counter = new AtomicLong();
 
 	@RequestMapping("/uuid")
-	public UUID uuid(@RequestParam(value = "username", defaultValue = "anonymous") String username) {
-		return new UUID(counter.incrementAndGet(), String.format(template, username, "completed"));
+	public UUID resource(@RequestParam(value = "id", defaultValue = "0") int reqid, @RequestParam(value = "db", defaultValue = "0") int dbid) {
+		return new UUID(counter.incrementAndGet(), String.format(template, reqid, dbid));
 	}
 }
